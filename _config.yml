@@ -1,12 +1,10 @@
-title: Long Haul
-description: Long Form Jekyll theme built with SASS / COMPASS / SUSY
+title: goseoan blog
+description: goseoan blog
 
-url: http://brianmaierjr.github.com/long-haul
+url: https://goseoan.github.io
 baseurl: ""
-paginate_path: "blog/page:num/"
-permalink: blog/:title/
 
-markdown: kramdown
+markdown: goseoan
 highlighter: rouge
 gems: [jekyll-paginate]
 paginate: 5
@@ -20,9 +18,8 @@ navigation:
    url: /contact
 
 social:
-   github: brianmaierjr
-   twitter: brianmaierjr
-   facebook: brianmaierjr
-   email: brimaidesigns@gmail.com
+   github: goseoan
+   facebook: goseoan
+   email: goseoan@gmail.com
 
 google_analytics: "UA-58263416-1"
