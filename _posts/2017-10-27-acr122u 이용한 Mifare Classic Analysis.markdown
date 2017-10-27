@@ -9,20 +9,19 @@ date:   2017-10-27
 ## ACR122U
 NFC 리더기로써 libnfc의 호환이 가능성 러더기 제품 중 하나로써, Mifare Serise, ISO 14443 호환 태그 뿐만 아니라, ISO/IEC 18092태그까지 Read/Write 할 수 있다.
 
-https://www.acs.com.hk/en/products/3/acr122u-usb-nfc-reader/
+[ACR122U 리더기 스펙][https://www.acs.com.hk/en/products/3/acr122u-usb-nfc-reader/]
 
 nfc-tools의 nfclib를 이용하여 카드의 규격 확인 및 다양한 정보를 얻을 수 있고,
 
 mfoc, mfcuk를 사용하여 mifare classic card의 password를 크랙 할 수 있다.
 
-http://nfc-tools.org/index.php?title=Main_Page
-https://github.com/nfc-tools
+
 
 ## ACR122u sdk
 
 ACR122u를 사용방법으로는 ACS ACR122U SDK(software Develoment Kit), libnfc가 좋다고 판단한다.
 
-acr122u sdk는 구매를 통하여 얻을수 있으며, 인터넷를 뒤져보면 자료가 있다.
+acr122u sdk는 구매를 통하여 얻을수 있으며, 인터넷를 뒤져보면 다운 받을수 있다.
 
 그 밖에도 간단한 프로그램으로느 https://www.acs.com.hk/en/utility-tools/에 acr122u프로그램을 제공해주고 있다.
 
@@ -31,15 +30,18 @@ APDU(Application Protocol Data Uint) Commands를 이용하여 정보를 얻어�
 
 ## nfc-tools
 
+[NFC-tools Wiki][http://nfc-tools.org/index.php?title=Main_Page]
+[NFC-tools github][https://github.com/nfc-tools]
+
 NFCLIB를 이용하기 위해서는 host 환경에 linux에서 사용하는 것이 최선이며, windows에서는 많은 오류와 버그가 발생한다. nfc 분석환경에서 hack rf one를 최선으로 사용하기 위해 pentoo를 사용하기 때문에 pentoo linux를 이용하여 libnfc를 이용하는 환경을 구축한다.
 
 pentoo에서는 emerge libnfc를 이용하여 libnfc를 설치하며 다른운영체제의 설치 방법은 다음 아래 사이트를 참조하면 된다.
 
-http://nfc-tools.org/index.php?title=Libnfc
+[LIBNFC-운영체제별 설치방법][http://nfc-tools.org/index.php?title=Libnfc]
 
 pentoo는 liveos 운영체제로 하였으며, usb에 설치 하여 동작하였다.
 booting과정은 boot순서를 usb를 제일 위로 올려주어서 부팅하여야한다.
-LG gram모델같은 uffi모드와 secure boot모드를 해제 하여 실행하였다.
+제가 사용하는 LG gram모델같은 경우 uffi모드와 secure boot모드를 해제 하여 실행하였다.
 advanced에서 pentoo를 실행하여
 startx명령어를 통하여 gui 운영체제로 부팅하였고
 
@@ -95,7 +97,7 @@ emerge libnfc
 echo "blacklist nfc\nblacklist pn533\nblacklist pn533_usb" >> /etc/modprobe.d/blacklist.conf
 modprobe -r pn533
 modprobe -r nfc
-LIBNFC_LOG_LEVEL=3 nfc-list
+
 nfc-list
 
 #install mfoc
@@ -138,7 +140,17 @@ cd src
 
 ```
 
-그 밖에도 분석하는 방법에는 
+## 추가적인 분석하는 방법 
 
 MCT(Mifare Classic Tool) App을 통한 분석을 할수 있다.
 - http://blog.naver.com/ndb796
+
+## 도움 되는 정보
+
+카드 규격
+Mifare Classic
+Mifare Ultralight
+
+APDU관련
+iso 1816
+iso 14443
