@@ -4,7 +4,6 @@ title:  "ACR122u를 이용한 Mifare Classic Anaylsis"
 date:   2017-10-27
 ---
 
-## ACR122u를 이용한 Mifare Classic Anaylsis
 
 ### ACR122U
 NFC 리더기로써 libnfc의 호환이 가능성 러더기 제품 중 하나로써, Mifare Serise, ISO 14443 호환 태그 뿐만 아니라, ISO/IEC 18092태그까지 Read/Write 할 수 있다.
@@ -32,6 +31,7 @@ APDU(Application Protocol Data Uint) Commands를 이용하여 정보를 얻어�
 ### nfc-tools
 
 [NFC-tools Wiki](http://nfc-tools.org/index.php?title=Main_Page)
+
 [NFC-tools github](https://github.com/nfc-tools)
 
 NFCLIB를 이용하기 위해서는 host 환경에 linux에서 사용하는 것이 최선이며, windows에서는 많은 오류와 버그가 발생한다. nfc 분석환경에서 hack rf one를 최선으로 사용하기 위해 pentoo를 사용하기 때문에 pentoo linux를 이용하여 libnfc를 이용하는 환경을 구축한다.
@@ -50,6 +50,7 @@ command를 통하여 기본적인 설정을 한다.
 
 sudo 
 passwd pentoo (스크린세이버가 걸리면 패스워드를 요구 한다. 스크린세이버 데몬을 죽여도 된다.)
+
 service NetworkMange start(Wifi 설정을 위하여 실행하였다.)
 
 emerge nfclist
@@ -58,12 +59,17 @@ modprobe –r nfc
 
 를 하여 acr122u를 통하여 nfclib tool을 사용할 수 있다.
 
-nfc-list
+연결확인 nfc-list
 
-카드 정보 확인
-nfc-list –v
+카드 정보 확인 nfc-list –v
 
-mfoc
+### mfcuk
+mfcuk는 Mifare Classic의 Crypto1 취약점을 이용하여 하나의 키를 알아내는 프로그램으로써 아무런 키값을 모르는 경우 사용한다.
+키를 모르는 경우 MFOC를 사용하기 위해서 선행되어야 한다.
+
+./mfcuk -C -R 0:A -s 250 -S 250 -v 3
+
+### mfoc
 기본키나 알고있는 키를 기반으로 하여 mifare classic의 crypto1 취약점을 이용하여 나머지 키를 알아낸다.
 
 mfoc –o card_dump.mfd –P 999 –k ffffffffffff –k 12345678 | tee card_dump.txt
@@ -72,7 +78,7 @@ mfoc –o card_dump.mfd –P 999 –k ffffffffffff –k 12345678 | tee card_dump
 -k 알고 있는 key
 tee cmd로 출력된 값을 txt로 받아준다.
 
-./mfcuk -C -R 0:A -s 250 -S 250 -v 3
+
 
 pentoo libnfc , mfoc, mfcuk install shell
 
@@ -144,7 +150,7 @@ cd src
 
 nfclib 를 통하여 Key를 크랙하고, 얻은 key 를 가지고 MCT APP을 통하여 분석하는 방법이 제일 효율적이였다.
 
-### 보안 대안
+### 보안적인 대응방법
 
 아직까지 Mifare Classic이 사용되는 있는 시점에서 이러한 문제를 해결 하기 위해서는 기본키 또는 알려진 키를 사용하지 않으며,
 금액 정보와 같은 금액 정보에 인코딩을 사용하고, CheckSUM을 사용하여 위험을 최대한 감소 하는 방법이 있을수 있다.
@@ -156,18 +162,26 @@ nfclib 를 통하여 Key를 크랙하고, 얻은 key 를 가지고 MCT APP을 �
 
 ### 추가적인 분석하는 방법 
 
-MCT(Mifare Classic Tool) App을 통한 분석을 할수 있다.
-- http://blog.naver.com/ndb796
+- [MCT(Mifare Classic Tool) App을 통한 분석](http://blog.naver.com/ndb796)을 할수 있다.
+
+- Proxmark3를 이용한 분석 
+현재 Proxmark3가 rfid 연구 분석 목적으로 제일 좋으며, 다양한 Read Card Spec를 보유하고 있다.
+ACR122U 가격과 얼마 차이가 안나는 Proxmark3 easy를  구매할수 있는 걸로 확인된다.
+다만 해외 배송이라는 단점이 있다.
 
 ### 도움 되는 정보
 
-카드 규격
+- 카드 규격
 Mifare Classic
 Mifare Ultralight
 
-APDU관련
+- APDU관련
 iso 1816
 iso 14443
 
-### 주의사항(윤리의식)
-자료의 내용은 사회적으로 보안적으로 도움이 되기 위해서 작성하였으며, 잘못 사용하여 문제가 발생하였을 시  모든 책임은 본인에게 있습니다.
+### 주의사항
+- 윤리의식
+자료의 내용은 사회적으로 보안적으로 도움이 되기 위해서 작성하였으며, 잘못 사용하여 문제가 발생하였을 시 모든 책임은 본인에게 있습니다.
+
+- 안내
+여기의 기재된 내용은 본인의 연구를 통한 자료이며, 개인적인 의견이 반영 되었습니다. 잘못된 부분이 있으면 이메이을 통하여 문의하여 주세요.
