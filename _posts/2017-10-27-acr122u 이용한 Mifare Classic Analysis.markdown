@@ -8,7 +8,7 @@ date:   2017-10-27
 ### ACR122U
 NFC 리더기로써 libnfc의 사용이 가능한 러더기 제품 중 하나이다. Mifare Series, ISO 14443 호환 태그, ISO/IEC 18092태그까지 Read/Write 할 수 있다.
 
-<img src='/assets/img/acr122u_spec.jpg' | prepend: site.baseurl }}" alt=""> 
+<img src="{{ '/assets/img/acr122u_spec.jpg' | prepend: site.baseurl }}" alt=""> 
 
 [ACR122U 리더기 스펙](https://www.acs.com.hk/en/products/3/acr122u-usb-nfc-reader/)
 
@@ -28,7 +28,7 @@ acr122u sdk는 구매를 통하여 얻을수 있으며, 인터넷를 뒤져보�
 
 그 밖에도 간단한 프로그램으로는 [ACS Util](https://www.acs.com.hk/en/utility-tools/)에서 제공해주고 있으나, 별로 효율적이지는 않다.
 
-<img src='/assets/img/APDU%20commands.jpg' | prepend: site.baseurl }}" alt=""> 
+<img src="{{ '/assets/img/APDU%20commands.jpg' | prepend: site.baseurl }}" alt=""> 
 
 Readers Commands의 New Connections를 통하여 장비를 선택하여 연결한다. 연결이 되고 난후 제공되는 기능은 Firmware Version, LED and Buzzer, Antenna ON/OFF, Status, Get Data, Get ATR, Set PICC Operating Parameter, Get PICC Operating Parameter 가 있다.
  
@@ -57,7 +57,7 @@ PENTOO OS에서는 emerge libnfc 명령어를 이용하여 nfc-tools의 libnfc�
 
 추가적으로 카드 규격 및 정보를 확인하기 위해서 nfc-list –v라는 명령어를 사용한다.
 
-<img src='/assets/img/Screenshot_2017-10-28_14-42-59.png' | prepend: site.baseurl }}" alt=""> 
+<img src="{{ '/assets/img/Screenshot_2017-10-28_14-42-59.png' | prepend: site.baseurl }}" alt=""> 
 
 이제 mfoc를 사용하기 위해서는 github에서 repository를 복제해야하는데 이를 위해서 git을 설치해야한다. emerge git를 통하여 git를 설치한 다음에 git cloen 명령어를 통하여 nfc-tools의 mfoc, mfcuk를 복제하여 컴파일 과정을 수행한다.
 
@@ -76,7 +76,7 @@ tee cmd로 출력된 값을 txt로 받아준다.
 
 MFOC 프로그램은 각 해당 Sector에 대한 Key만 알고 있어도 CRYPTO1의 구조적 취약점을 이용해 나머지 모든 Key를 알아 낼 수 있는 공격기법이다. 
 
-<img src='/assets/img/Screenshot_2017-10-28_14-46-43.png' | prepend: site.baseurl }}" alt=""> 
+<img src="{{ '/assets/img/Screenshot_2017-10-28_14-46-43.png' | prepend: site.baseurl }}" alt=""> 
 
 mfoc –o card_dump.mfd –P 999 –k ffffffffffff –k 12345678 | tee card_dump.txt
 -o 결과 파일 출력
@@ -84,7 +84,7 @@ mfoc –o card_dump.mfd –P 999 –k ffffffffffff –k 12345678 | tee card_dump
 -k 알고 있는 key
 tee cmd로 출력된 값을 txt로 받아준다.
 
-<img src='/assets/img/Screenshot_2017-10-28_14-48-01.png' | prepend: site.baseurl }}" alt=""> 
+<img src="{{'/assets/img/Screenshot_2017-10-28_14-48-01.png' | prepend: site.baseurl }}" alt=""> 
 
 
 ### mfcuk
@@ -94,11 +94,11 @@ MFCUK 프로그램은 모든 Sector의 Key를 모르는 경우 사용한다. 이
 ./mfcuk -C -R 0:A -s 250 -S 250 –v 3
 
 다음 그림과 같이 진행 되는 것을 확인 할 수 있고, 
-<img src='/assets/img/Screenshot_2017-10-28_14-50-40.png' | prepend: site.baseurl }}" alt=""> 
+<img src="{{ '/assets/img/Screenshot_2017-10-28_14-50-40.png' | prepend: site.baseurl }}" alt=""> 
 
 
 다음 그림과 같이 1개의 키값을 얻어내는것을 알 수 있다.
-<img src='/assets/img/Screenshot_2017-10-28_16-31-00.png' | prepend: site.baseurl }}" alt=""> 
+<img src="{{ '/assets/img/Screenshot_2017-10-28_16-31-00.png' | prepend: site.baseurl }}" alt=""> 
 
 
 pentoo libnfc , mfoc, mfcuk install shell
