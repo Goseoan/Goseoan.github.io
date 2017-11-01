@@ -22,4 +22,7 @@ social:
    facebook: goseoan
    email: goseoan@gmail.com
 
+plugins:
+  - jekyll-sitemap
+
 google_analytics: "UA-58263416-1"
